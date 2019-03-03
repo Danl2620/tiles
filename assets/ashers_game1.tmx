@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../../Applications/Tiled/examples/desert.tsx"/>
+ <tileset firstgid="49" name="oryx_16bit_scifi_items" tilewidth="16" tileheight="16" tilecount="198">
+  <tileoffset x="4" y="-6"/>
+  <image source="oryx_16bit_scifi_items.png" trans="000000" width="352" height="144"/>
+ </tileset>
+ <tileset firstgid="247" source="tilesets/oryx_16bit_scifi_creatures.tsx"/>
+ <tileset firstgid="1559" source="tilesets/oryx_16bit_scifi_world.tsx"/>
+ <tileset firstgid="2994" source="tilesets/oryx_16bit_scifi_FX_sm_trans.tsx"/>
+ <layer name="ground/wall" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAffGTDxOSo+YZFDT3wd6hbfkDZwez0xV+QwuLLqP2j9o/aP2r/qP2j9o/aP2r/qP2j9tPJfhA9ku0f6eE/0P4HgR8D0P/7iaUvCgL4+qrDDQAAUieKAw==
+  </data>
+ </layer>
+ <layer name="objects" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFMFAHxM045KzZ6OkSVDCHhX72TwbiN0B8Dk2cXvZ7A3EcEO8YIPsj2BkY9gHpJ0CsykN/+52g9AognookPpDpj172g+zAhwcDaGSjHh61f9T+UftH7R+1f9T+UftH7aeX/frMEDyQ9n9hIs/+UUBdAABeDMqf
+  </data>
+ </layer>
+ <layer name="characters" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6Db1P4pjKFzkICES7q2BwAAAHw0iLoAYg==
+  </data>
+ </layer>
+</map>
