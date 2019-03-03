@@ -5,6 +5,8 @@ local map
 local world
 local tx, ty
 local points
+local startTime
+local npcX
 
 function love.load()
 	-- Load map
@@ -28,7 +30,11 @@ function love.load()
 		mouse = {},
 		pixel = {}
 	}
-	love.graphics.setPointSize(5)
+  love.graphics.setPointSize(5)
+  
+  startTime = love.timer.getTime()
+  npcX = map.objects[4].x
+ 
 end
 
 
@@ -46,7 +52,11 @@ end
 
 
 function love.update(dt)
-	world:update(dt)
+  local npc = map.objects[4]
+  local t = love.timer.getTime() - startTime
+  npc.x = npcX - (24*math.max(math.floor(t/4), 0))
+  
+  world:update(dt)
 	map:update(dt)
 
 	-- Move map
@@ -59,11 +69,13 @@ function love.update(dt)
 	tx = l and tx - 128 * dt or tx
 	tx = r and tx + 128 * dt or tx
 	ty = u and ty - 128 * dt or ty
-	ty = d and ty + 128 * dt or ty
+  ty = d and ty + 128 * dt or ty
+  
 end
 
 function love.draw()
-	-- Draw map
+
+  -- Draw map
 	love.graphics.setColor(255, 255, 255)
 	map:draw(-tx, -ty)
 
@@ -71,18 +83,29 @@ function love.draw()
 	love.graphics.setColor(255, 0, 255)
 	map:box2d_draw(-tx, -ty)
 
-	-- Draw points
-	love.graphics.translate(-tx, -ty)
+	-- -- Draw points
+	-- love.graphics.translate(-tx, -ty)
 
-	love.graphics.setColor(255, 0, 255)
-	for _, point in ipairs(points.mouse) do
-		love.graphics.points(point.x, point.y)
-	end
+	-- love.graphics.setColor(255, 0, 255)
+	-- for _, point in ipairs(points.mouse) do
+	-- 	love.graphics.points(point.x, point.y)
+	-- end
 
-	love.graphics.setColor(255, 255, 0)
-	for _, point in ipairs(points.pixel) do
-		love.graphics.points(point.x, point.y)
-	end
+	-- love.graphics.setColor(255, 255, 0)
+	-- for _, point in ipairs(points.pixel) do
+	-- 	love.graphics.points(point.x, point.y)
+  -- end
+
+  for idx, npc in pairs(map.objects) do
+    local msg = string.format(
+      'NPC %d: %s (%d, %d)',
+      idx,
+      npc.name,
+      npc.x,
+      npc.y)
+    love.graphics.print(msg,0, idx*24)
+  end
+
 end
 
 function love.mousepressed(x, y, button)

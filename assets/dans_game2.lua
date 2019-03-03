@@ -179,7 +179,7 @@ return {
         },
         {
           id = 3,
-          name = "",
+          name = "key_silver_0",
           type = "",
           shape = "rectangle",
           x = 432,
@@ -202,7 +202,7 @@ return {
       objects = {
         {
           id = 4,
-          name = "",
+          name = "gun_monster_0",
           type = "",
           shape = "rectangle",
           x = 336,
