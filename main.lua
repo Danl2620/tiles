@@ -18,7 +18,7 @@ function love.load()
 
   tx = 0
   ty = 0
-  scale = 1 -- Adjust zoom with this
+  scale = 1.5 -- Adjust zoom with this
                  
 	-- Prepare physics world
 	love.physics.setMeter(32)
