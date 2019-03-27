@@ -18,12 +18,12 @@ function love.load()
 
   tx = 0
   ty = 0
-  scale = 1.5 -- Adjust zoom with this
-                 
+  scale = 3.0 -- Adjust zoom with this
+
 	-- Prepare physics world
-	love.physics.setMeter(32)
-	world = love.physics.newWorld(0, 0)
-	map:box2d_init(world)
+	-- love.physics.setMeter(32)
+	-- world = love.physics.newWorld(0, 0)
+	-- map:box2d_init(world)
 
 	-- Drop points on clicked areas
 	points = {
@@ -35,9 +35,7 @@ function love.load()
   startTime = love.timer.getTime()
   -- npcX = map.objects[4].x
  
-	map:addCustomLayer("Sprites", 8)
-	local spriteLayer = map.layers["Sprites"]
-	assert(spriteLayer ~= nil)
+	-- extract player definition
 	local player
 	for _,obj in pairs(map.objects) do
 		if obj.name == "player_0" then
@@ -46,7 +44,26 @@ function love.load()
 		end
 	end
 	assert(player ~= nil)
-	
+	map:removeLayer("NPCs")
+
+	-- create character layer
+	map:addCustomLayer("characters", 2)
+	local spriteLayer = map.layers["characters"]
+	assert(spriteLayer ~= nil)
+	spriteLayer.visible = true
+	spriteLayer.draw = function(self)
+		-- assert(false)
+		for _, sprite in pairs(self.sprites) do
+			local x = math.floor(sprite.x)
+			local y = math.floor(sprite.y)
+
+			love.graphics.draw(sprite.image, x, y, 0) -- , 1, 1, self.player.ox, self.player.oy)
+			love.graphics.setPointSize(5)
+			love.graphics.points(x,y)
+		end
+	end
+
+
 	-- Create player object
 	local playerImage = "assets/sliced/creatures_sliced/images/oryx_16bit_scifi_creatures_01.png"
 	local playerSprite = love.graphics.newImage(playerImage)
@@ -54,25 +71,13 @@ function love.load()
 	spriteLayer.sprites = {
 		player = {
 			image  = playerSprite,
-			x      = playerSprite.x,
-			y      = playerSprite.y,
+			x      = player.x,
+			y      = player.y,
 			ox     = playerSprite:getWidth(),
 			oy     = playerSprite:getHeight()
 		}
 	}
 
-	function spriteLayer:draw()
-		assert(false)
-		for _, sprite in pairs(self.sprites) do
-			local x = math.floor(sprite.x)
-			local y = math.floor(sprite.y)
-
-			love.graphics.draw(sprite.image, x, y, 0) -- , 1, 1, self.player.ox, self.player.oy)
-			-- love.graphics.setPointSize(5)
-			-- love.graphics.points(math.floor(self.player.x), math.floor(self.player.y))
-		end
-	end
-	map:removeLayer("NPCs")
 end
 
 
@@ -94,7 +99,7 @@ function love.update(dt)
   -- local t = love.timer.getTime() - startTime
   -- npc.x = npcX - (24*math.max(math.floor(t/4), 0))
   
-  world:update(dt)
+  -- world:update(dt)
 	map:update(dt)
 
 	-- Move map
@@ -114,12 +119,12 @@ end
 function love.draw()
 
   -- Draw map
-	love.graphics.setColor(255, 255, 255)
+	-- love.graphics.setColor(255, 255, 255)
 	map:draw() -- -tx, -ty)
 
 	-- Draw physics objects
-	love.graphics.setColor(255, 0, 255)
-	map:box2d_draw(-tx, -ty)
+	-- love.graphics.setColor(255, 0, 255)
+	-- map:box2d_draw(-tx, -ty)
 
 	-- -- Draw points
 	-- love.graphics.translate(-tx, -ty)
