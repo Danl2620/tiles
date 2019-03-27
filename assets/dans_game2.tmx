@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" nextobjectid="5">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" nextobjectid="6">
  <tileset firstgid="1" source="tilesets/oryx_16bit_scifi_creatures.tsx"/>
  <tileset firstgid="1313" source="tilesets/oryx_16bit_scifi_FX_sm_trans.tsx"/>
  <tileset firstgid="1513" source="tilesets/oryx_16bit_scifi_items.tsx"/>
@@ -41,11 +41,12 @@
 </data>
  </layer>
  <objectgroup name="items">
-  <object id="1" gid="1590" x="192" y="96" width="16" height="16"/>
-  <object id="2" gid="1608" x="168" y="96" width="16" height="16"/>
+  <object id="1" name="card_0" gid="1590" x="192" y="96" width="16" height="16"/>
+  <object id="2" name="helmet_0" gid="1608" x="168" y="96" width="16" height="16"/>
   <object id="3" name="key_silver_0" gid="1594" x="432" y="216" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="NPCs">
   <object id="4" name="gun_monster_0" gid="326" x="336" y="144" width="24" height="24"/>
+  <object id="5" name="player_0" gid="1" x="120" y="96" width="24" height="24"/>
  </objectgroup>
 </map>

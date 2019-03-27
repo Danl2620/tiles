@@ -6,7 +6,7 @@ local world
 local tx, ty
 local points
 local startTime
-local npcX
+-- local npcX
 
 function love.load()
 	-- Load map
@@ -33,8 +33,46 @@ function love.load()
   love.graphics.setPointSize(5)
   
   startTime = love.timer.getTime()
-  npcX = map.objects[4].x
+  -- npcX = map.objects[4].x
  
+	map:addCustomLayer("Sprites", 8)
+	local spriteLayer = map.layers["Sprites"]
+	assert(spriteLayer ~= nil)
+	local player
+	for _,obj in pairs(map.objects) do
+		if obj.name == "player_0" then
+			player = obj
+			break
+		end
+	end
+	assert(player ~= nil)
+	
+	-- Create player object
+	local playerImage = "assets/sliced/creatures_sliced/images/oryx_16bit_scifi_creatures_01.png"
+	local playerSprite = love.graphics.newImage(playerImage)
+	assert(playerSprite ~= nil)
+	spriteLayer.sprites = {
+		player = {
+			image  = playerSprite,
+			x      = playerSprite.x,
+			y      = playerSprite.y,
+			ox     = playerSprite:getWidth(),
+			oy     = playerSprite:getHeight()
+		}
+	}
+
+	function spriteLayer:draw()
+		assert(false)
+		for _, sprite in pairs(self.sprites) do
+			local x = math.floor(sprite.x)
+			local y = math.floor(sprite.y)
+
+			love.graphics.draw(sprite.image, x, y, 0) -- , 1, 1, self.player.ox, self.player.oy)
+			-- love.graphics.setPointSize(5)
+			-- love.graphics.points(math.floor(self.player.x), math.floor(self.player.y))
+		end
+	end
+	map:removeLayer("NPCs")
 end
 
 
@@ -52,9 +90,9 @@ end
 
 
 function love.update(dt)
-  local npc = map.objects[4]
-  local t = love.timer.getTime() - startTime
-  npc.x = npcX - (24*math.max(math.floor(t/4), 0))
+  -- local npc = map.objects[4]
+  -- local t = love.timer.getTime() - startTime
+  -- npc.x = npcX - (24*math.max(math.floor(t/4), 0))
   
   world:update(dt)
 	map:update(dt)
@@ -77,7 +115,7 @@ function love.draw()
 
   -- Draw map
 	love.graphics.setColor(255, 255, 255)
-	map:draw(-tx, -ty)
+	map:draw() -- -tx, -ty)
 
 	-- Draw physics objects
 	love.graphics.setColor(255, 0, 255)
@@ -96,15 +134,15 @@ function love.draw()
 	-- 	love.graphics.points(point.x, point.y)
   -- end
 
-  for idx, npc in pairs(map.objects) do
-    local msg = string.format(
-      'NPC %d: %s (%d, %d)',
-      idx,
-      npc.name,
-      npc.x,
-      npc.y)
-    love.graphics.print(msg,0, idx*24)
-  end
+  -- for idx, npc in pairs(map.objects) do
+  --   local msg = string.format(
+  --     'NPC %d: %s (%d, %d)',
+  --     idx,
+  --     npc.name,
+  --     npc.x,
+  --     npc.y)
+  --   love.graphics.print(msg,0, idx*24)
+  -- end
 
 end
 

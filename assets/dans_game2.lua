@@ -7,7 +7,7 @@ return {
   height = 32,
   tilewidth = 24,
   tileheight = 24,
-  nextobjectid = 5,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -151,7 +151,7 @@ return {
       objects = {
         {
           id = 1,
-          name = "",
+          name = "card_0",
           type = "",
           shape = "rectangle",
           x = 192,
@@ -165,7 +165,7 @@ return {
         },
         {
           id = 2,
-          name = "",
+          name = "helmet_0",
           type = "",
           shape = "rectangle",
           x = 168,
@@ -211,6 +211,20 @@ return {
           height = 24,
           rotation = 0,
           gid = 326,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 5,
+          name = "player_0",
+          type = "",
+          shape = "rectangle",
+          x = 120,
+          y = 96,
+          width = 24,
+          height = 24,
+          rotation = 0,
+          gid = 1,
           visible = true,
           properties = {}
         }
